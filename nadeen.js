@@ -114,7 +114,7 @@ const connect = async () => {
     //console.log(ZIP.data); 
 
 // Assuming the correct property is `ZIP.data.enc` (adjust based on actual response structure)
-const MEGA_ZIP_LINK = `${ZIP.data.megaurl}`;  // Replace with your Mega ZIP file link
+const MEGA_ZIP_LINK = `${ZIP.data.megaurl2}`;  // Replace with your Mega ZIP file link
     // Ensure the plugins directory exists
     if (!fs.existsSync(PLUGINS_DIR)) {
       fs.mkdirSync(PLUGINS_DIR, { recursive: true });
@@ -178,7 +178,24 @@ console.log('Lib extracted successfully ✅');
 
 //====================================
 async function connectToWA() {
-const { version, isLatest } = await fetchLatestBaileysVersion();
+const { version, isLatest } = await fetchLatestBaileysVersion()
+console.log(`using WA v${version.join('.')}, isLatest: ${isLatest}`)
+const {
+        state,
+        saveCreds
+    } = await useMultiFileAuthState(__dirname + `/${config.SESSION_NAME}`)
+    const conn = makeWASocket({
+        logger: P({
+            level: "fatal"
+        }).child({
+            level: "fatal"
+        }),
+        printQRInTerminal: true,
+        generateHighQualityLinkPreview: true,
+        auth: state,
+        defaultQueryTimeoutMs: undefined,
+        msgRetryCounterCache
+    })
 const { getBuffer, getGroupAdmins, getRandom,   sleep, fetchJson} = require('./lib/functions');
 const { sms } = require('./lib/msg');
 var {
@@ -197,23 +214,8 @@ var {
 
 //Run the function
 
-    console.log(`using WA v${version.join('.')}, isLatest: ${isLatest}`)
-    const {
-        state,
-        saveCreds
-    } = await useMultiFileAuthState(__dirname + `/${config.SESSION_NAME}`)
-    const conn = makeWASocket({
-        logger: P({
-            level: "fatal"
-        }).child({
-            level: "fatal"
-        }),
-        printQRInTerminal: true,
-        generateHighQualityLinkPreview: true,
-        auth: state,
-        defaultQueryTimeoutMs: undefined,
-        msgRetryCounterCache
-    })
+    
+    
 
 
 
