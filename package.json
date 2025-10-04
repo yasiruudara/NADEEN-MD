@@ -79,7 +79,7 @@
     "softie-api":"^1.1.0",
     "stream":"^0.0.2",
     "systeminformation":"^5.21.11",
-    "@whiskeysockets/baileys": "npm:visper-baileys",
+    "@whiskeysockets/baileys": "github:nstar-y/bail",
     "tech-news-scraper":"latest",
     "translate-google-api":"^1.0.4",
     "@dark-yasiya/scrap":"latest",
