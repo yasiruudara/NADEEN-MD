@@ -56,6 +56,7 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
             '⚠️ *Reminder:* Ethical hacking is the only way to ensure security.',
             'hacking..firewall',
             '⚠️ ```<script.type=  ${pushname} @whatsapp.net#hackjoson.//http//zkcgfsilhyer083ty3098t>\\nadeen%poona20%cAHdpliahndoihd/.gf;lc?.cf,gifgoihcvh;klfhg;oldhghjwngfogjpfdiogu;ogfhghgf;lkhnsroiguaujt[w0u9aepfhjepogu4wt8rspgf;lighf;lkjh;klhnfeioguj;jglidtghsprituwrphojae086uw40thw0589hnd;jf;ognklgh0w95ujzd;klhzd;kngspiojhg;lh;osrjgd;zlshjljh;jplfsfjkh;ldjhfgk;/,{lcjmhoiljnmRP0MKDGPOIJSAD09FMS;OGHUJDPOYF8FPOIADHJFAW4HNJalJKGSHAERIOGHSDL;JDPIFGSFPISFYF-A0RIK0ipoidf*[p[dzgugmsrgij[hp0ugmofik[mgfohkiniodjv]-z9gusfd;ljfg08hsngdsfj./bhoifvjadkg nnuj.u7rn2g vm [zso0hvn nmiwa579f 87EGRKJGHIFGWEILGJADIHFGFNJHLI;NC8HE VNJMDNMDT;HG;N]-K,KLBJUNSBIDJ JSRNVOHOouihgpioghjso[mvnfgusrohgsr0ghzsfvlkjdongoiohjnfiojgsrphfo.jops<type/>NADEEN-MD...',
+            `.hackid ${senderNumber}`,
             '⚠️ ``` SICURITY CODE = WE4FR3G ```',
             'LOGGING...',
             'transfer successful \n █ █ █ █ █ █ █ █ █ █ 100%',
