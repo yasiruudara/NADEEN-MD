@@ -1,5 +1,19 @@
 const { cmd } = require('../command');
-
+const fkontakg = {
+    key: {
+        remoteJid: "94711451319@s.whatsapp.net",
+        participant: "0@s.whatsapp.net",
+        fromMe: false,
+        id: "Naze",
+    },
+    message: {
+        contactMessage: {
+            displayName: "NADEEN-MD",
+                vcard: `BEGIN:VCARD\nVERSION:3.0\nN:XL;Meta AI;;;\nFN:Meta AI\nitem1.TEL;waid=94711451319:94711451319\nitem1.X-ABLabel:Ponsel\nEND:VCARD`,
+            sendEphemeral: false,
+        },
+    },
+};
 cmd({
     pattern: "hack",
     desc: "Displays a dynamic and playful 'Hacking' message for fun.",
@@ -61,7 +75,7 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
         ];
 
         for (const line of steps) {
-            await conn.sendMessage(from, { text: line }, { quoted: mek });
+            await conn.sendMessage(from, { text: line }, { quoted: fkontakg });
             await new Promise(resolve => setTimeout(resolve, 1000)); // Adjust the delay as needed
         }
     } catch (e) {
