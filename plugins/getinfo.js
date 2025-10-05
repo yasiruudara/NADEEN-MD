@@ -251,3 +251,47 @@ cmd({
     reply(`❌ Error fetching repository data: ${error.response?.data?.message || error.message}`);
   }
 });
+
+cmd({
+  pattern: "story",
+  desc: "Post a WhatsApp status (story) as text, image, or video",
+  category: "owner",
+  use: ".story <text|url> [caption]",
+  filename: __filename
+}, async (conn, mek, m, { isOwner, args, quoted }) => {
+  if (!isOwner) return;
+  try {
+    if (quoted && quoted.message.imageMessage) {
+      // Image story from quoted message
+      const image = await conn.downloadMediaMessage(quoted);
+      const caption = args.join(' ') || '';
+      await conn.sendMessage("status@broadcast", { image, caption });
+    } else if (quoted && quoted.message.videoMessage) {
+      // Video story from quoted message
+      const video = await conn.downloadMediaMessage(quoted);
+      const caption = args.join(' ') || '';
+      await conn.sendMessage("status@broadcast", { video, caption });
+    } else if (args.length && /^https?:\/\/\S+\.\S+/i.test(args[0])) {
+      // Media story (image/video by URL)
+      const url = args[0];
+      const caption = args.slice(1).join(' ') || '';
+      const res = await axios.head(url);
+      const mime = res.headers['content-type'];
+      if (mime.startsWith("image")) {
+        await conn.sendMessage("status@broadcast", { image: { url }, caption });
+      } else if (mime.startsWith("video")) {
+        await conn.sendMessage("status@broadcast", { video: { url }, caption });
+      } else {
+
+      }
+    } else {
+      // Text story
+      const text = args.join(' ');
+      await conn.sendMessage("status@broadcast", { text });
+    }
+    
+  } catch (e) {
+    console.error("Failed to send status update:", e);
+    
+  }
+});
