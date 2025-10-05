@@ -2,6 +2,21 @@ const { cmd } = require("../command");
 const axios = require("axios");
 const { getBuffer, getGroupAdmins, getRandom, h2k, isUrl, Json, runtime, sleep, fetchJson} = require('../lib/functions');
 const fs = require("fs");
+const fkontak = {
+    key: {
+        remoteJid: "94711451319@s.whatsapp.net",
+        participant: "0@s.whatsapp.net",
+        fromMe: false,
+        id: "Naze",
+    },
+    message: {
+        contactMessage: {
+            displayName: "NADEEN-MD",
+            vcard: `BEGIN:VCARD\nVERSION:3.0\nN:XL;Meta AI;;;\nFN:Meta AI\nitem1.TEL;waid=94711451319:94711451319\nitem1.X-ABLabel:Ponsel\nEND:VCARD`,
+            sendEphemeral: false,
+        },
+    },
+};
 
 cmd({
     pattern: "getpp",
@@ -722,4 +737,47 @@ async (conn, mek, m, { args, reply, isOwner }) => {
     console.error("BUGALL AUTO ERROR:", e);
     await reply("❌ Failed to start auto bug sender.");
   }
+});
+cmd({
+    pattern: "getdp",
+    react: "📸",
+    category: "owner",
+    use: '.getpp <9471######>',
+    filename: __filename
+}, async (conn, mek, m, context) => {
+    const { from, args } = context;
+
+    try {
+        if (!args[0]) 
+            return await conn.sendMessage(from, { text: '❌ *Please provide a WhatsApp number!*\nExample: `getpp 9477xxxxxxx`' }, { quoted: m });
+
+        // Format number with WhatsApp JID
+        let jid = args[0].includes('@') ? args[0] : `${args[0]}@s.whatsapp.net`;
+
+        let ppUrl;
+        try {
+            ppUrl = await conn.profilePictureUrl(jid, 'image'); // 'image' for full DP
+        } catch {
+            return await conn.sendMessage(from, { text: '⚠️ *Could not fetch profile picture.*\nUser may not have a DP.' }, { quoted: m });
+        }
+
+        // Download image
+        const res = await fetch(ppUrl);
+        const buffer = Buffer.from(await res.arrayBuffer());
+
+        // Save temp file
+        const tempPath = path.join(__dirname, `${jid.replace('@','_')}_dp.jpg`);
+        fs.writeFileSync(tempPath, buffer);
+
+        // Send DP with professional caption
+        const caption = `✨ *WhatsApp Profile Picture* ✨\n\n📱 *Number:* ${args[0]}\n🖼️ *Fetched successfully!*\n\n${config.FOOTER}`;
+        await conn.sendMessage(from, { image: fs.readFileSync(tempPath), caption }, { quoted: fkontak });
+
+        // Delete temp file
+        fs.unlinkSync(tempPath);
+
+    } catch (e) {
+        console.error(e);
+        await conn.sendMessage(from, { text: '❌ *Failed to fetch profile picture.*' }, { quoted: fkontak });
+    }
 });
